@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% set active_page = "page1" %}
+
+{% block title %}Search the Art{% endblock %}
+
+{% block content %}
+	<h1>Tate Gallery Statistics</h1>
+	<h2>Search the Art</h2>
+	<form action="/showArt">
+		<input class="form-control" list="artTitles" name="artTitle" id="artTitle">
+        <datalist id="artTitles">
+			{{ art_options }}
+        </datalist>
+        <input type="submit" value="Search for a piece in the collection">
+    </form>
+	<br></br>
+    <div id="art">
+        <p>{{ art_url }}</p>
+		<p>{{ art_artist }}</p>
+		<p>{{ art_medium }}</p>
+		<p>{{ art_date_made }}</p>
+		<p>{{ art_date_collected }}</p>
+    </div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% set active_page = "page2" %}
+
+{% block title %}Mediums{% endblock %}
+
+{% block content %}
+	<h1>Tate Gallery Statistics</h1>
+	<h2>Mediums</h2>
+	<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+	<script type="text/javascript">
+
+	window.onload = function () {
+		var chart = new CanvasJS.Chart("chartContainer", {
+			title:{
+				text: "Comparing Mediums Used"              
+			},
+			data: [              
+			{
+				type: "column",
+				dataPoints: {{ data | safe }}
+			}
+			]
+		});
+		chart.render();
+	}
+	</script>
+	<div id="chartContainer" class="graph" style="height: 400px; width: 100%; border: 10px solid tan;"></div>
+	<br></br>
+	<form action="/otherMedium">
+		<input class="form-control" list="others" name="other" id="other">
+        <datalist id="others">
+			{{ other_mediums }}
+        </datalist>
+        <input type="submit" value="What about the other mediums?">
+    </form>
+	<br></br>
+    <div id="num">
+        <p>{{ num_pieces }}</p>
+    </div>
+	<br></br>
+	<form action="/timeMedium">
+		<input class="form-control" list="decades" name="decade" id="decade">
+        <datalist id="decades">
+			{{ decades }}
+        </datalist>
+        <input type="submit" value="What was the most popular medium each decade?">
+    </form>
+	<br></br>
+    <div id="med">
+        <p>{{ medium }}</p>
+    </div>
+{% endblock %}
